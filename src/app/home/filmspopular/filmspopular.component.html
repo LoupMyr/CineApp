@@ -1,0 +1,23 @@
+<div class="grid grid-cols-5 gap-10 p-10">
+  <div class="card-centerEnd">
+    <svg class="svg-icon" viewBox="0 0 20 20" width="100">
+      <path fill="white" d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+    </svg>
+  </div>
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700" *ngFor="let film of listefilms">
+    <a href="#">
+      <img class="rounded-t-lg w-96 h-96" src="{{film.imgurl}}" alt="" />
+    </a>
+    <div class="p-5">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{film.name}}</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+    </div>
+  </div>
+  <div class="card-centerStart">
+    <svg class="svg-icon" viewBox="0 0 20 20" width="100">
+      <path fill="white" d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+    </svg>
+  </div>
+</div>
