@@ -11,6 +11,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './home/search/search.component';
 import { FilmspopularComponent } from './home/filmspopular/filmspopular.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SearchService } from "./Services/search.service";
+import {HttpClientModule} from "@angular/common/http";
+import { SearchResultComponent } from './search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,11 @@ import { FilmspopularComponent } from './home/filmspopular/filmspopular.componen
     NavbarComponent,
     FooterComponent,
     SearchComponent,
-    FilmspopularComponent
+    FilmspopularComponent,
+    SearchResultComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-  ],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

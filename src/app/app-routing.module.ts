@@ -4,6 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {SearchResultComponent} from "./search-result/search-result.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'signin', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
+  {path: 'search-result/:search', component: SearchResultComponent}
 ];
 
 @NgModule({
