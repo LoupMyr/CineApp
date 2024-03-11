@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -9,28 +9,25 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 
 export class SearchComponent {
+  types = [
+    {name: 'All', value: 'all'},
+    {name: 'Movies', value: 'movies'},
+    {name: 'Series', value: 'series'},
+  ];
 
   searchForm = new FormGroup({
     search: new FormControl(),
+    types: new FormControl(this.types[0]),
   });
 
-  constructor(private router : Router, private route : ActivatedRoute) {}
 
-  onSubmit(event : any){
-    let estDejaEnRecherche = false;
-    this.route.params.subscribe(
-      params => {
-        if(params["search"]){
-          estDejaEnRecherche = true;
-        }
-      }
-    );
-    if(estDejaEnRecherche){
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(["/search-result",this.searchForm.get("search")?.value])});
-    } else {
-      this.router.navigate(["/search-result",this.searchForm.get("search")?.value]);
-    }
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
+
+  onSubmit() {
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(["/search-result", this.searchForm.get("search")?.value.replace(/\s/g, "%20"), this.searchForm.get("types")?.value?.value])
+    });
   }
 
 }
