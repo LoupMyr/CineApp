@@ -3,12 +3,12 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss']
 })
 
-export class SearchComponent {
+export class SearchBarComponent {
   types = [
     {name: 'All', value: 'all'},
     {name: 'Movies', value: 'movies'},

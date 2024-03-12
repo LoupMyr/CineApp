@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'signin', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
-  {path: 'search-result/:type/:search/:nbPage', component: SearchResultComponent}
+  {path: 'search-bar-result/:type/:search-bar/:nbPage', component: SearchResultComponent}
 ];
 
 @NgModule({

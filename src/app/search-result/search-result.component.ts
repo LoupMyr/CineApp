@@ -4,7 +4,7 @@ import {SearchService} from "../Services/search.service";
 import {Search} from "../Models/Search";
 
 @Component({
-  selector: 'app-search-result',
+  selector: 'app-search-bar-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.css']
 })

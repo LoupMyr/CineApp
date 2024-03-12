@@ -9,7 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { SearchComponent } from './home/search/search.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 import { FilmspopularComponent } from './home/filmspopular/filmspopular.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SearchService } from "./Services/search.service";
@@ -25,7 +25,7 @@ import { SearchResultComponent } from './search-result/search-result.component';
     RegisterComponent,
     NavbarComponent,
     FooterComponent,
-    SearchComponent,
+    SearchBarComponent,
     FilmspopularComponent,
     SearchResultComponent
   ],
