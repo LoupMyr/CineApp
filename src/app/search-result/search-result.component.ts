@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {SearchService} from "../Services/search.service";
-import {Movie} from "../Models/Movie";
-import {Media} from "../Models/Media";
+import {Search} from "../Models/Search";
 
 @Component({
   selector: 'app-search-result',
@@ -13,29 +12,32 @@ export class SearchResultComponent implements OnInit {
 
   public search : string = "";
   public type : string = "";
-  public medias : Media[] = [];
+  public nbPage : number = 1;
+
+  public result: Search = new Search(0, 0, []);
 
   constructor(private route : ActivatedRoute, private searchService : SearchService) {
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.route.params.subscribe(
       params => {
         this.search = params["search"];
-        this.type = params["type"]
+        this.type = params["type"];
+        this.nbPage = params["nbPage"];
       }
     );
-    if(this.search){
-      switch (this.type){
-        case "all": {
-          this.medias = this.searchService.getMoviesBySearch(this.search);
-          break;
-        }
+    if (this.search) {
+      switch (this.type) {
         case "movies": {
-          this.medias = this.searchService.getSeriesBySearch(this.search);
+          this.result = await this.searchService.getMoviesBySearch(this.search, this.nbPage);
           break;
         }
         case "series": {
-          this.medias = this.searchService.getMediaBySearch(this.search);
+          this.result = await this.searchService.getSeriesBySearch(this.search, this.nbPage);
+          break;
+        }
+        case "all": {
+          this.result = await this.searchService.getMediaBySearch(this.search, this.nbPage);
           break;
         }
       }

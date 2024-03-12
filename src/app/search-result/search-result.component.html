@@ -3,9 +3,9 @@
   <app-search></app-search>
 </div>
 
-<ng-container *ngIf="medias.length > 0; else moviesEmpty">
+<ng-container *ngIf="result.medias.length > 0; else moviesEmpty">
   <div class="grid grid-cols-5 gap-10 p-10">
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow" *ngFor="let media of medias">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow" *ngFor="let media of result.medias">
       <ng-container *ngIf="media.poster_path; else elsePoster">
         <a href="#">
           <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{media.poster_path}}"

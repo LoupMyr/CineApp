@@ -26,7 +26,7 @@ export class SearchComponent {
 
   onSubmit() {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-      this.router.navigate(["/search-result", this.searchForm.get("search")?.value.replace(/\s/g, "%20"), this.searchForm.get("types")?.value?.value])
+      this.router.navigate(["/search-result", this.searchForm.get("types")?.value?.value, this.searchForm.get("search")?.value.replace(/\s/g, "%20"), 1])
     });
   }
 

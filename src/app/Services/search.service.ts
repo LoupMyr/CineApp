@@ -5,6 +5,7 @@ import {Genre} from "../Models/Genre";
 import {Serie} from "../Models/Serie";
 import {Saison} from "../Models/Saison";
 import {Media} from "../Models/Media";
+import {Search} from "../Models/Search";
 
 @Injectable({providedIn: "root"})
 export class SearchService {
@@ -14,13 +15,20 @@ export class SearchService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getMoviesBySearch(search: string): Movie[] {
+  // @ts-ignore
+  async getMoviesBySearch(search: string, nbPage: number): Promise<Search> {
     let movies: Movie[] = [];
-    const response = this.httpClient.get(this.URL + "searchMovies/" + search);
-    response.subscribe(
-      result => {
-        let data: any[] = result as Array<any>
-        for (const movie of data) {
+    let result : Search = new Search(0,0,[]);
+    await this.httpClient.get(`${this.URL}searchMovies/${search}/${nbPage}`
+    ).forEach(
+      response => {
+        let data: any[] = response as any[];
+        // @ts-ignore
+        let total_pages: number = data["total_pages"];
+        // @ts-ignore
+        let total_results: number = data["total_results"];
+        // @ts-ignore
+        for (const movie of data["medias"]) {
           let genres: Genre[] = [];
           for (const genre of movie["genres"]) {
             genres.push(new Genre(genre["id"], genre["name"]));
@@ -30,18 +38,24 @@ export class SearchService {
               genres, movie["release_date"]
             ));
         }
+        result = new Search(total_pages, total_results, movies);
       }
     );
-    return movies;
+    return result;
   }
 
-  getSeriesBySearch(search: string): Serie[] {
+  async getSeriesBySearch(search: string, nbPage : number): Promise<Search> {
     let series: Serie[] = [];
-    const response = this.httpClient.get(this.URL + "searchSeries/" + search);
-    response.subscribe(
-      result => {
-        let data: any[] = result as Array<any>
-        for (const serie of data) {
+    let result : Search = new Search(0, 0, []);
+    await this.httpClient.get(this.URL + "searchSeries/" + search + "/" + nbPage).forEach(
+      response => {
+        let data: any[] = response as any[];
+        // @ts-ignore
+        let total_pages: number = data["total_pages"];
+        // @ts-ignore
+        let total_results: number = data["total_results"];
+        // @ts-ignore
+        for (const serie of data["medias"]) {
           let genres: Genre[] = [];
           let seasons: Saison[] = [];
           if (serie["seasons"]) {
@@ -57,18 +71,24 @@ export class SearchService {
               genres, seasons, serie["numberEpisodes"], serie["numberSaisons"]
             ));
         }
+        result = new Search(total_pages, total_results, series);
       }
     );
-    return series;
+    return result;
   }
 
-  getMediaBySearch(search: string): Media[] {
+  async getMediaBySearch(search: string, nbPage : number): Promise<Search> {
     let medias: Media[] = [];
-    const response = this.httpClient.get(this.URL + "searchMedia/" + search);
-    response.subscribe(
-      result => {
-        let data: any[] = result as Array<any>
-        for (let media of data) {
+    let result : Search = new Search(0, 0, []);
+    await this.httpClient.get(this.URL + "searchMedia/" + search + "/" + nbPage).forEach(
+      response => {
+        let data: any[] = response as any[];
+        // @ts-ignore
+        let total_pages: number = data["total_pages"];
+        // @ts-ignore
+        let total_results: number = data["total_results"];
+        // @ts-ignore
+        for (const media of data["medias"]) {
           let genres: Genre[] = [];
           for (let genre of media["genres"]) {
             genres.push(new Genre(genre["id"], genre["name"]));
@@ -91,10 +111,10 @@ export class SearchService {
               genres, media["release_date"]
             ));
           }
-
         }
+        result = new Search(total_pages, total_results, medias);
       }
     );
-    return medias;
+    return result;
   }
 }
