@@ -15,10 +15,9 @@ export class SearchService {
   constructor(private httpClient: HttpClient) {
   }
 
-  // @ts-ignore
   async getMoviesBySearch(search: string, nbPage: number): Promise<Search> {
     let movies: Movie[] = [];
-    let result : Search = new Search(0,0,[]);
+    let result: Search = new Search(0, 0, []);
     await this.httpClient.get(`${this.URL}searchMovies/${search}/${nbPage}`
     ).forEach(
       response => {
@@ -44,9 +43,9 @@ export class SearchService {
     return result;
   }
 
-  async getSeriesBySearch(search: string, nbPage : number): Promise<Search> {
+  async getSeriesBySearch(search: string, nbPage: number): Promise<Search> {
     let series: Serie[] = [];
-    let result : Search = new Search(0, 0, []);
+    let result: Search = new Search(0, 0, []);
     await this.httpClient.get(this.URL + "searchSeries/" + search + "/" + nbPage).forEach(
       response => {
         let data: any[] = response as any[];
@@ -77,9 +76,9 @@ export class SearchService {
     return result;
   }
 
-  async getMediaBySearch(search: string, nbPage : number): Promise<Search> {
+  async getMediaBySearch(search: string, nbPage: number): Promise<Search> {
     let medias: Media[] = [];
-    let result : Search = new Search(0, 0, []);
+    let result: Search = new Search(0, 0, []);
     await this.httpClient.get(this.URL + "searchMedia/" + search + "/" + nbPage).forEach(
       response => {
         let data: any[] = response as any[];
@@ -115,6 +114,51 @@ export class SearchService {
         result = new Search(total_pages, total_results, medias);
       }
     );
+    return result;
+  }
+
+  async getMovieById(idMedia: number) {
+    let result: Movie = new Movie(0, "", "", "", "", [], new Date());
+    await this.httpClient.get(`${this.URL}getMovieById/${idMedia}`
+    ).forEach(
+      response => {
+        let movie: any[] = response as any[];
+        let genres: Genre[] = [];
+        // @ts-ignore
+        for (const genre of movie["genres"]) {
+          genres.push(new Genre(genre["id"], genre["name"]));
+        }
+        // @ts-ignore
+        result = new Movie(movie["id"], movie["title"], movie["backdrop_path"], movie["poster_path"], movie["desc"], genres, movie["release_date"]
+        );
+      });
+    return result;
+  }
+
+  async getSerieById(idMedia: number) {
+    let result : Serie = new Serie(0, "", "", "", "",
+      [], [], 0, 0);
+    await this.httpClient.get(`${this.URL}getSerieById/${idMedia}`
+    ).forEach(
+      response => {
+        let serie: any[] = response as any[];
+        let genres: Genre[] = [];
+        let seasons: Saison[] = [];
+        // @ts-ignore
+        if (serie["seasons"]) {
+          // @ts-ignore
+          for (const season of serie["seasons"]) {
+            seasons.push(new Saison(season["id"], season["name"], season["release_date"], season["episode_count"], season["overview"], season["poster_path"]));
+          }
+        }
+        // @ts-ignore
+        for (const genre of serie["genres"]) {
+          genres.push(new Genre(genre["id"], genre["name"]));
+        }
+        // @ts-ignore
+        result = new Serie(serie["id"], serie["title"], serie["backdrop_path"], serie["poster_path"], serie["desc"], genres, seasons, serie["numberEpisodes"], serie["numberSaisons"]
+        );
+      });
     return result;
   }
 }

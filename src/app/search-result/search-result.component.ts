@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SearchService} from "../Services/search.service";
 import {Search} from "../Models/Search";
+import {Media} from "../Models/Media";
+import {Serie} from "../Models/Serie";
 
 @Component({
   selector: 'app-search-bar-result',
@@ -10,14 +12,15 @@ import {Search} from "../Models/Search";
 })
 export class SearchResultComponent implements OnInit {
 
-  public search : string = "";
-  public type : string = "";
-  public nbPage : number = 1;
+  public search: string = "";
+  public type: string = "";
+  public nbPage: number = 1;
 
   public result: Search = new Search(0, 0, []);
 
-  constructor(private route : ActivatedRoute, private searchService : SearchService) {
+  constructor(private route: ActivatedRoute, private searchService: SearchService, private router : Router) {
   }
+
   async ngOnInit() {
     this.route.params.subscribe(
       params => {
@@ -26,6 +29,10 @@ export class SearchResultComponent implements OnInit {
         this.nbPage = params["nbPage"];
       }
     );
+    await this.getBySearch();
+  }
+
+  async getBySearch() {
     if (this.search) {
       switch (this.type) {
         case "movies": {
@@ -41,7 +48,34 @@ export class SearchResultComponent implements OnInit {
           break;
         }
       }
-
     }
   }
+
+  async incrementPage(){
+    if(this.nbPage < this.result.total_pages){
+      this.nbPage++;
+      this.reloadPage();
+    }
+  }
+
+  async decrementPage(){
+    if(this.nbPage > 1){
+      this.nbPage--;
+      this.reloadPage();
+    }
+  }
+  reloadPage(){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(["/search-result", this.type, this.search, this.nbPage])
+    });
+  }
+
+  redirectToDetailRoute(media : Media){
+    let type : string = "movie";
+    if(Object.getPrototypeOf(media) === Serie.prototype){
+      type = "serie";
+    }
+    this.router.navigate(["/detail-media", type, media.id])
+  }
 }
+

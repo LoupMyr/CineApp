@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SearchService } from "./Services/search.service";
 import {HttpClientModule} from "@angular/common/http";
 import { SearchResultComponent } from './search-result/search-result.component';
+import { DetailMediaComponent } from './detail-media/detail-media.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SearchResultComponent } from './search-result/search-result.component';
     FooterComponent,
     SearchBarComponent,
     FilmspopularComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    DetailMediaComponent
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   providers: [SearchService],

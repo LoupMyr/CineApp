@@ -5,30 +5,46 @@
 
 <ng-container *ngIf="result.medias.length > 0; else moviesEmpty">
   <div class="grid grid-cols-5 gap-10 p-10">
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow" *ngFor="let media of result. medias">
-      <ng-container *ngIf="media.poster_path; else elsePoster">
-        <a href="#">
-          <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{media.poster_path}}"
-               alt="affiche film"/>
-        </a>
-      </ng-container>
-      <ng-template #elsePoster>
-        <img class="rounded-t-lg w-full" src="/assets/img-not-found.svg"
-             alt="affiche film"/>
-      </ng-template>
-      <div class="p-5">
-        <a href="#">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ media.title }}</h5>
-        </a>
-        <ng-container *ngIf="media.desc.length > 200; else elseDesc">
-          <p class="mb-3 font-normal text-gray-700"> {{ media.desc | slice:0:200}}...</p>
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow" routerLink="/detail-media/"
+         *ngFor="let media of result.medias">
+      <div (click)="redirectToDetailRoute(media)">
+        <ng-container *ngIf="media.poster_path; else elsePoster">
+          <a>
+            <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{media.poster_path}}"
+                 alt="affiche film"/>
+          </a>
         </ng-container>
-        <ng-template #elseDesc>
-          <p class="mb-3 font-normal text-gray-700" >{{ media.desc }}</p>
+        <ng-template #elsePoster>
+          <img class="rounded-t-lg w-full" src="/assets/img-not-found.svg"
+               alt="affiche film"/>
         </ng-template>
+        <div class="p-5">
+          <a>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ media.title }}</h5>
+          </a>
+          <ng-container *ngIf="media.desc.length > 200; else elseDesc">
+            <p class="mb-3 font-normal text-gray-700"> {{ media.desc | slice:0:200 }}...</p>
+          </ng-container>
+          <ng-template #elseDesc>
+            <p class="mb-3 font-normal text-gray-700">{{ media.desc }}</p>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="flex justify-center pb-10">
+    <a (click)="decrementPage()"
+       class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      Previous
+    </a>
+
+    <a (click)="incrementPage()"
+       class="flex items-center justify-center px-3 h-8 ms-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+      Next
+    </a>
+  </div>
+
 </ng-container>
 
 <ng-template #moviesEmpty>

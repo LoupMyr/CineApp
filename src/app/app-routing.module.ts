@@ -5,6 +5,7 @@ import {AboutComponent} from "./about/about.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {SearchResultComponent} from "./search-result/search-result.component";
+import {DetailMediaComponent} from "./detail-media/detail-media.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'signin', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
-  {path: 'search-result/:type/:search/:nbPage', component: SearchResultComponent}
+  {path: 'search-result/:type/:search/:nbPage', component: SearchResultComponent},
+  {path: 'detail-media/:type/:idMedia', component: DetailMediaComponent}
 ];
 
 @NgModule({
