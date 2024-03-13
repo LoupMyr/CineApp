@@ -5,7 +5,7 @@
 
 <ng-container *ngIf="result.medias.length > 0; else moviesEmpty">
   <div class="grid grid-cols-5 gap-10 p-10">
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow" routerLink="/detail-media/"
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow affiche-movie" routerLink="/detail-media/"
          *ngFor="let media of result.medias">
       <div (click)="redirectToDetailRoute(media)">
         <ng-container *ngIf="media.poster_path; else elsePoster">

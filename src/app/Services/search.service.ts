@@ -161,4 +161,26 @@ export class SearchService {
       });
     return result;
   }
+
+  async getPopularMovies(){
+    let result : Movie[] = [];
+    await this.httpClient.get(`${this.URL}getPopularMovies`
+    ).forEach(
+      response => {
+        console.log(response);
+        let data: any[] = response as any[];
+        for (const movie of data) {
+          let genres: Genre[] = [];
+          for (const genre of movie["genres"]) {
+            genres.push(new Genre(genre["id"], genre["name"]));
+          }
+          result.push(
+            new Movie(movie["id"], movie["title"], movie["backdrop_path"], movie["poster_path"], movie["desc"],
+              genres, movie["release_date"]
+            ));
+        }
+      }
+    );
+    return result;
+  }
 }

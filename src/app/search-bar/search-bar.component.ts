@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class SearchBarComponent {
   types = [
-    {name: 'All', value: 'all'},
+    {name: 'All types', value: 'all'},
     {name: 'Movies', value: 'movies'},
     {name: 'Series', value: 'series'},
   ];

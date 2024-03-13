@@ -8,7 +8,7 @@ import {Serie} from "../Models/Serie";
 @Component({
   selector: 'app-search-bar-result',
   templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  styleUrls: ['./search-result.component.scss']
 })
 export class SearchResultComponent implements OnInit {
 
