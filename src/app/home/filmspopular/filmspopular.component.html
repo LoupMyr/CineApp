@@ -1,54 +1,48 @@
 <div id="default-carousel" class="relative w-full h-full" data-carousel="slide">
   <!-- Carousel wrapper -->
-  <div class="relative overflow-hidden rounded-lg" style="height: 155vh">
+  <div class="relative overflow-hidden rounded-lg h-full">
 
     <!-- Item 1 -->
     <div class="duration-700 ease-in-out" data-carousel-item>
-      <div class="grid grid-cols-3">
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow affiche-movie"
-             (click)="redirectToDetailRoute(movie)" *ngFor="let movie of moviesPopular; let i = index">
-          <div *ngIf="i < 3">
-            <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
-                 alt="affiche film" height="500px"/>
-            <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ movie.title }}</h5>
-              <p class="mb-3 font-normal text-gray-700">{{movie.desc}}</p>
+      <div class="h-full">
+        <div class="flex justify-evenly bg-smokedPearl">
+          <ng-container *ngFor="let movie of moviesPopular; let i = index">
+            <div class="max-w-52 bg-white border border-gray-200 rounded-lg shadow affiche-movie"
+                 (click)="redirectToDetailRoute(movie)" *ngIf="i < 3">
+              <img class="rounded-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+                   alt="affiche film"/>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
 
     <!-- Item 2 -->
     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-      <div class="grid grid-cols-3">
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow affiche-movie"
-             (click)="redirectToDetailRoute(movie)" *ngFor="let movie of moviesPopular; let i = index">
-          <div *ngIf="i >= 3 && i < 6">
-            <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
-                 alt="affiche film"/>
-            <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ movie.title }}</h5>
-              <p class="mb-3 font-normal text-gray-700">{{movie.desc}}</p>
+      <div class="h-full">
+        <div class="flex justify-evenly bg-smokedPearl">
+          <ng-container *ngFor="let movie of moviesPopular; let i = index" >
+            <div class="max-w-52 border border-gray-200 rounded-lg shadow affiche-movie"
+                 (click)="redirectToDetailRoute(movie)" *ngIf="i >= 3 && i < 6">
+              <img class="rounded-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+                   alt="affiche film"/>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
 
     <!-- Item 3 -->
     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-      <div class="grid grid-cols-3">
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow affiche-movie"
-             (click)="redirectToDetailRoute(movie)" *ngFor="let movie of moviesPopular; let i = index">
-          <div *ngIf="i >= 6 && i < 9">
-            <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
-                 alt="affiche film"/>
-            <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ movie.title }}</h5>
-              <p class="mb-3 font-normal text-gray-700">{{movie.desc}}</p>
+      <div class="h-full">
+        <div class="flex justify-evenly bg-smokedPearl">
+          <ng-container *ngFor="let movie of moviesPopular; let i = index" >
+            <div class="max-w-52 bg-white border border-gray-200 rounded-lg shadow affiche-movie"
+                 (click)="redirectToDetailRoute(movie)" *ngIf="i >= 6 && i < 9">
+              <img class="rounded-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+                   alt="affiche film"/>
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -92,12 +86,3 @@
         </span>
   </button>
 </div>
-
-
-<!--<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow affiche-movie" (click)="redirectToDetailRoute(movie)" *ngFor="let movie of moviesPopular">-->
-<!--      <img class="rounded-t-lg w-full" src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt="affiche film" />-->
-<!--    <div class="p-5">-->
-<!--        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{movie.title}}</h5>-->
-<!--      <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>-->
-<!--    </div>-->
-<!--  </div>-->
